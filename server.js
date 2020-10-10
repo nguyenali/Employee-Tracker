@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const cTable = require("console.table");
 const db = require(".");
 const { of } = require("rxjs");
+const { start } = require("repl");
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -70,5 +71,33 @@ function startScreen() {
                 quit();
 
         }
+    });
+}
+
+function addRole() {
+
+    inquirer.prompt( [
+        {
+        type: "input",
+        message: "What is the name of the role?",
+        name: "roleName"
+        },
+        {
+            type: "input",
+            message: "What is the salary for this role?",
+            name: "salaryTotal"
+        },
+        {
+            type: "input",
+            message: "What is the department id number?",
+            name: "deptID"
+        }
+    ])
+    .then(function(answer) {
+        connection.query("INSERT INTO role (title, salary, department_id) VALUES (?,?,?)", [answer.roleName, answer,salaryTotal, answer.deptID], function(err, res) {
+            if(err) throw err;
+            console.table(res);
+            startScreen();
+        });
     });
 }
