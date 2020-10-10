@@ -197,3 +197,14 @@ function viewRoles() {
     });
     // show the result to the user (console.table)
   }
+
+function viewDepartment() {
+    // select from the db
+    let query = "SELECT * FROM department";
+    connection.query(query, function(err, res) {
+      if (err) throw err;
+      console.table(res);
+      startScreen();
+    });
+    // show the result to the user (console.table)
+  }
