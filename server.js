@@ -219,3 +219,8 @@ function viewEmployees() {
     });
     // show the result to the user (console.table)
   }
+
+function quit() {
+    connection.end();
+    process.exit();
+}
