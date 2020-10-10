@@ -158,7 +158,7 @@ function addEmployee() {
       });
   }
 
-  function updateEmployee() {
+function updateEmployee() {
     inquirer
       .prompt([
         {
@@ -185,4 +185,3 @@ function addEmployee() {
         });
       });
   }
-  
