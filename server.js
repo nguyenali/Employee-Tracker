@@ -185,3 +185,15 @@ function updateEmployee() {
         });
       });
   }
+
+
+function viewRoles() {
+    
+    let query = "SELECT * FROM role";
+    connection.query(query, function(err, res) {
+      if (err) throw err;
+      console.table(res);
+      startScreen();
+    });
+    // show the result to the user (console.table)
+  }
