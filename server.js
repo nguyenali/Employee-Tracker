@@ -21,3 +21,24 @@ connection.connect(function(err) {
 
     startScreen();
 });
+
+
+function startScreen() {
+    inquirer
+    .prompt({
+
+        type: "list",
+        choices: [
+            "Add role",
+            "Add department",
+            "Add employee",
+            "View roles",
+            "View departments",
+            "View employees",
+            "Update employee role",
+            "Quit"
+        ],
+        message: "What would you like to do?",
+        name: "option"
+    })
+}
