@@ -75,3 +75,21 @@ INSERT INTO role (title, salary, department_id)
 VALUE ("Software Engineer", 120000, 2);
 INSERT INTO role (title, salary, department_id)
 VALUE ("Lawyer", 190000, 4);
+
+
+
+-- EMPLOYEE SEEDS -------
+INSERT INTO employee (first_name, last_name, manager_id, role_id)
+VALUE ("Jessica", "Haze", null, 1);
+INSERT INTO employee (first_name, last_name, manager_id, role_id)
+VALUE ("Tiffany", "Patric", null, 2);
+INSERT INTO employee (first_name, last_name, manager_id, role_id)
+VALUE ("Mia","Lam",null,3);
+INSERT INTO employee (first_name, last_name, manager_id, role_id)
+VALUE ("Bently", "Lao", 1, 4);
+INSERT INTO employee (first_name, last_name, manager_id, role_id)
+VALUE ("Chris", "Melby", 4, 5);
+INSERT INTO employee (first_name, last_name, manager_id, role_id)
+VALUE ("Jason", "Baker", 1, 6);
+INSERT INTO employee (first_name, last_name, manager_id, role_id)
+VALUE ("Tom", "Nice", 2, 7);
