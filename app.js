@@ -101,63 +101,79 @@ function(err, res) {
 }
 
 
+//================= Select Role Quieries Role Title for Add Employee Prompt ===========//
+var roleArr = [];
+function selectRole() {
+  connection.query("SELECT * FROM role", function(err, res) {
+    if (err) throw err
+    for (var i = 0; i < res.length; i++) {
+      roleArr.push(res[i].title);
+    }
 
+  })
+  return roleArr;
+}
+//================= Select Role Quieries The Managers for Add Employee Prompt ===========//
+var managersArr = [];
+function selectManager() {
+  connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function(err, res) {
+    if (err) throw err
+    for (var i = 0; i < res.length; i++) {
+      managersArr.push(res[i].first_name);
+    }
 
-function addDepartment() {
+  })
+  return managersArr;
+}
+//============= Add Employee ==========================//
+function addEmployee() { 
+    inquirer.prompt([
+        {
+          name: "firstname",
+          type: "input",
+          message: "Enter their first name "
+        },
+        {
+          name: "lastname",
+          type: "input",
+          message: "Enter their last name "
+        },
+        {
+          name: "role",
+          type: "list",
+          message: "What is their role? ",
+          choices: selectRole()
+        },
+        {
+            name: "choice",
+            type: "rawlist",
+            message: "Whats their managers name?",
+            choices: selectManager()
+        }
+    ]).then(function (val) {
+      var roleId = selectRole().indexOf(val.role) + 1
+      var managerId = selectManager().indexOf(val.choice) + 1
+      connection.query("INSERT INTO employee SET ?", 
+      {
+          first_name: val.firstName,
+          last_name: val.lastName,
+          manager_id: managerId,
+          role_id: roleId
+          
+      }, function(err){
+          if (err) throw err
+          console.table(val)
+          startPrompt()
+      })
 
-
-    inquirer.prompt({
-      
-        type: "input",
-        message: "What is the name of the department?",
-        name: "deptName"
-
-    }).then(function(answer){
-
-
-
-        connection.query("INSERT INTO department (name) VALUES (?)", [answer.deptName] , function(err, res) {
-            if (err) throw err;
-            console.table(res)
-            startScreen()
-    })
-    })
+  })
 }
 
-function addEmployee() {
-    inquirer
-      .prompt([
-        {
-          type: "input",
-          message: "What's the first name of the employee?",
-          name: "eeFirstName"
-        },
-        {
-          type: "input",
-          message: "What's the last name of the employee?",
-          name: "eeLastName"
-        },
-        {
-          type: "input",
-          message: "What is the employee's role id number?",
-          name: "roleID"
-        },
-        {
-          type: "input",
-          message: "What is the manager id number?",
-          name: "managerID"
-        }
-      ])
-      .then(function(answer) {
-  
-        
-        connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.eeFirstName, answer.eeLastName, answer.roleID, answer.managerID], function(err, res) {
-          if (err) throw err;
-          console.table(res);
-          startScreen();
-        });
-      });
-  }
+
+
+
+
+
 
 function updateEmployee() {
     inquirer
