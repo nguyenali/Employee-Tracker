@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS ee_info_db;
+DROP DATABASE IF EXISTS employee_trackerDB;
 
-CREATE DATABASE ee_info_db;
+CREATE DATABASE employee_trackerDB;
 
-USE ee_info_db;
+USE employee_trackerDB;
 
 CREATE TABLE role (
 
