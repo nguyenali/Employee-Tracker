@@ -93,3 +93,10 @@ INSERT INTO employee (first_name, last_name, manager_id, role_id)
 VALUE ("Jason", "Baker", 1, 6);
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
 VALUE ("Tom", "Nice", 2, 7);
+
+
+-- SELECTING FOR CREATING 
+--TABLES IN OUR SQL WORKBENCH 
+SELECT * FROM department;
+SELECT * FROM role;
+SELECT * FROM employee;
