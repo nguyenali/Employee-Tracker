@@ -169,10 +169,10 @@ function addEmployee() {
   })
 }
 
-//============= Update Employee ==========================//
+
 function updateEmployee() {
   connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function(err, res) {
-  // console.log(res)
+
    if (err) throw err
    console.log(res)
   inquirer.prompt([
@@ -216,7 +216,7 @@ function updateEmployee() {
 
 }
 
-//============= Add Employee Role ==========================//
+
 function addRole() { 
   connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role",   function(err, res) {
     inquirer.prompt([
@@ -250,33 +250,26 @@ function addRole() {
   }
 
 
+function addDepartment() { 
 
-
-
-
-function viewDepartment() {
-    // select from the db
-    let query = "SELECT * FROM department";
-    connection.query(query, function(err, res) {
-      if (err) throw err;
-      console.table(res);
-      startScreen();
-    });
-    // show the result to the user (console.table)
-  }
-
-function viewEmployees() {
-    // select from the db
-    let query = "SELECT * FROM employee";
-    connection.query(query, function(err, res) {
-      if (err) throw err;
-      console.table(res);
-      startScreen();
-    });
-    // show the result to the user (console.table)
-  }
-
-function quit() {
-    connection.end();
-    process.exit();
+  inquirer.prompt([
+      {
+        name: "name",
+        type: "input",
+        message: "What Department would you like to add?"
+      }
+  ]).then(function(res) {
+      var query = connection.query(
+          "INSERT INTO department SET ? ",
+          {
+            name: res.name
+          
+          },
+          function(err) {
+              if (err) throw err
+              console.table(res);
+              startPrompt();
+          }
+      )
+  })
 }
