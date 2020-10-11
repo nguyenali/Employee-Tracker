@@ -150,24 +150,24 @@ function addEmployee() {
             message: "Whats their managers name?",
             choices: selectManager()
         }
-    ]).then(function (val) {
+    ]).then(function(val) {
       console.log(val);
       var roleId = selectRole().indexOf(val.role) + 1
       var managerId = selectManager().indexOf(val.choice) + 1
-      console.log(roleId);
-      console.log(managerId);
-      // connection.query("INSERT INTO employee SET ?", 
-      // {
-      //     first_name: val.firstName,
-      //     last_name: val.lastName,
-      //     manager_id: managerId,
-      //     role_id: roleId
-          
-      // }, function(err){
-      //     if (err) throw err
-      //     console.table(val)
-      //     startPrompt()
-      // })
+      console.log("roleId: :", roleId);
+      console.log("managerId: ", managerId);
+     
+      connection.query("INSERT INTO employee SET ?", {
+          first_name: val.firstName,
+          last_name: val.lastName,
+          manager_id: managerId,
+          role_id: roleId
+      }, function(err, result) {
+          if(err) throw err;
+          console.log("1 record inserted: ", result);
+          console.table(val)
+          startPrompt()
+      })
 
   })
 }
