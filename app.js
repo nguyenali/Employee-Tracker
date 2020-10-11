@@ -72,33 +72,36 @@ function startPrompt() {
   })
 }
 
-function addRole() {
 
-    inquirer.prompt( [
-        {
-        type: "input",
-        message: "What is the name of the role?",
-        name: "roleName"
-        },
-        {
-            type: "input",
-            message: "What is the salary for this role?",
-            name: "salaryTotal"
-        },
-        {
-            type: "input",
-            message: "What is the department id number?",
-            name: "deptID"
-        }
-    ])
-    .then(function(answer) {
-        connection.query("INSERT INTO role (title, salary, department_id) VALUES (?,?,?)", [answer.roleName, answer,salaryTotal, answer.deptID], function(err, res) {
-            if(err) throw err;
-            console.table(res);
-            startScreen();
-        });
-    });
+function viewAllEmployees() {
+  connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employee INNER JOIN role on role.id = employee.role_id INNER JOIN department on department.id = role.department_id left join employee e on employee.manager_id = e.id;", 
+  function(err, res) {
+    if (err) throw err
+    console.table(res)
+    startPrompt()
+})
 }
+
+function viewAllRoles() {
+connection.query("SELECT employee.first_name, employee.last_name, role.title AS Title FROM employee JOIN role ON employee.role_id = role.id;", 
+function(err, res) {
+if (err) throw err
+console.table(res)
+startPrompt()
+})
+}
+
+function viewAllDepartments() {
+connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;", 
+function(err, res) {
+  if (err) throw err
+  console.table(res)
+  startPrompt()
+})
+}
+
+
+
 
 function addDepartment() {
 
