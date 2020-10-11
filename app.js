@@ -32,7 +32,7 @@ function startPrompt() {
   choices: [
             "View All Employees?", 
             "View All Employee's By Roles?",
-            "View all Emplyees By Deparments", 
+            "View all Emplyees By Departments", 
             "Update Employee",
             "Add Employee?",
             "Add Role?",
@@ -48,7 +48,7 @@ function startPrompt() {
         case "View All Employee's By Roles?":
             viewAllRoles();
           break;
-        case "View all Emplyees By Deparments":
+        case "View all Emplyees By Departments":
             viewAllDepartments();
           break;
         
