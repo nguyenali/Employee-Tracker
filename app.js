@@ -1,17 +1,17 @@
 const inquirer = require("inquirer");
-const mysql = require("mysql");
-const cTable = require('console.table');
+const mysql = require("mysql2");
+require('console.table');
 
 
 
 const connection = mysql.createConnection({
     host: "localhost",
 
-    port: 3000,
+    
 
     user: "root",
 
-    password: "root",
+    password: "alithanhhuynguyen",
     database: "employee_trackerDB"
 });
 
@@ -19,7 +19,7 @@ connection.connect(function(err) {
     if(err) throw err;
     console.log("Connected as id" + connection.threadId);
 
-    startPrompt();
+    
 });
 
 
@@ -151,20 +151,23 @@ function addEmployee() {
             choices: selectManager()
         }
     ]).then(function (val) {
+      console.log(val);
       var roleId = selectRole().indexOf(val.role) + 1
       var managerId = selectManager().indexOf(val.choice) + 1
-      connection.query("INSERT INTO employee SET ?", 
-      {
-          first_name: val.firstName,
-          last_name: val.lastName,
-          manager_id: managerId,
-          role_id: roleId
+      console.log(roleId);
+      console.log(managerId);
+      // connection.query("INSERT INTO employee SET ?", 
+      // {
+      //     first_name: val.firstName,
+      //     last_name: val.lastName,
+      //     manager_id: managerId,
+      //     role_id: roleId
           
-      }, function(err){
-          if (err) throw err
-          console.table(val)
-          startPrompt()
-      })
+      // }, function(err){
+      //     if (err) throw err
+      //     console.table(val)
+      //     startPrompt()
+      // })
 
   })
 }
@@ -273,3 +276,5 @@ function addDepartment() {
       )
   })
 }
+
+startPrompt();
