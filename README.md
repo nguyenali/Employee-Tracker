@@ -1,5 +1,6 @@
 # Employee-Tracker
 
+<img width="587" alt="Screen Shot 2020-10-11 at 8 22 06 PM" src="https://user-images.githubusercontent.com/67357469/95701880-9045ed80-0bff-11eb-9166-8c8415535a12.png">
 
 
 ## Purpose:
