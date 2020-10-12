@@ -30,8 +30,8 @@ function startPrompt() {
   message: "What would you like to do?",
   name: "choice",
   choices: [
-            "View All Employees", 
-            "View All Employee's By Roles",
+            "View All Employees?", 
+            "View All Employee's By Roles?",
             "View all Emplyees By Departments", 
             "Update Employee",
             "Add Employee?",
